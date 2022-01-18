@@ -4,7 +4,6 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using LegacyFighter.Dietary.DAL;
 using LegacyFighter.Dietary.Models;
-using LegacyFighter.Dietary.Models.NewProducts;
 using NSubstitute;
 using Xunit;
 

@@ -8,7 +8,7 @@ namespace LegacyFighter.Dietary.DAL.Mappings
     {
         public void Configure(EntityTypeBuilder<OldProduct> builder)
         {
-            builder.HasKey(x => x.SerialNumber);
+            builder.HasKey(x => x.Id);
         }
     }
 }
