@@ -30,7 +30,7 @@ namespace LegacyFighter.Dietary.Models
 
         public Task<TaxRule> FindByTaxCodeContainingAsync(string taxCode)
             => Query()
-                .SingleOrDefaultAsync(x => x.TaxCode == taxCode);
+                .SingleOrDefaultAsync(x => x.TaxCode.Contains(taxCode));
 
         private IQueryable<TaxRule> Query()
             => _taxRules

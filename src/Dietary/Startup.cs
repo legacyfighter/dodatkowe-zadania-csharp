@@ -1,6 +1,5 @@
 using LegacyFighter.Dietary.DAL;
 using LegacyFighter.Dietary.Models;
-using LegacyFighter.Dietary.Models.Boundaries;
 using LegacyFighter.Dietary.Models.NewProducts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,12 +18,12 @@ namespace LegacyFighter.Dietary
                 .AddScoped<CustomerService>()
                 .AddScoped<OldProductService>()
                 .AddScoped<OrderService>()
-                .AddScoped<PaymentService>()
                 .AddScoped<TaxRuleService>()
                 .AddScoped<IAuthenticationFacade, AuthenticationFacade>()
                 .AddScoped<ICustomerRepository, CustomerRepository>()
                 .AddScoped<ICustomerOrderGroupRepository, CustomerOrderGroupRepository>()
                 .AddScoped<IOldProductRepository, OldProductRepository>()
+                .AddScoped<IOldProductDescriptionRepository, OldProductDescriptionRepository>()
                 .AddScoped<IOrderRepository, OrderRepository>()
                 .AddScoped<ITaxConfigRepository, TaxConfigRepository>()
                 .AddScoped<ITaxRuleRepository, TaxRuleRepository>()
