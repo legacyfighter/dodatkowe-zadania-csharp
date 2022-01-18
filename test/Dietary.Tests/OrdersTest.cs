@@ -92,9 +92,6 @@ namespace LegacyFighter.Dietary.Tests
         private readonly CustomerService _customerService;
         private readonly OrderService _orderService;
 
-        private readonly IOldProductRepository _oldProductRepository;
-        private readonly OldProductService _oldProductService;
-
         public OrdersTest()
         {
             _testDb = new TestDb();
