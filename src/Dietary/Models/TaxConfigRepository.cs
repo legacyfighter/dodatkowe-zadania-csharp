@@ -32,7 +32,7 @@ namespace LegacyFighter.Dietary.Models
 
         public Task<TaxConfig> FindByCountryCodeAsync(CountryCode countryCode)
             => Query()
-                .SingleOrDefaultAsync(x => x.CountryCode.Id.Equals(countryCode.Id));
+                .SingleOrDefaultAsync(x => x.CountryCode.Equals(countryCode));
 
         public Task<List<TaxConfig>> FindAllAsync()
             => Query().ToListAsync();

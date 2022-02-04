@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 using System.Threading.Tasks;
 using LegacyFighter.Dietary.Models;
 using LegacyFighter.Dietary.Models.NewProducts;
@@ -25,7 +24,58 @@ namespace LegacyFighter.Dietary.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetCallingAssembly());
+            modelBuilder.Entity<Customer>(builder =>
+            {
+                builder.HasKey(x => x.Id);
+                builder.HasOne(x => x.Group)
+                    .WithOne(x => x.Customer);
+            });
+            modelBuilder.Entity<CustomerOrderGroup>(builder =>
+            {
+                builder.HasKey(x => x.Id);
+                builder.HasOne(x => x.Customer)
+                    .WithOne(x => x.Group)
+                    .HasForeignKey<CustomerOrderGroup>(x => x.CustomerId);
+                builder.HasOne(x => x.Parent);
+                builder.HasMany(x => x.Children);
+                builder.HasMany(x => x.Orders);
+            });
+
+            modelBuilder.Entity<OldProduct>(builder =>
+            {
+                builder.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<OrderLine>(builder =>
+            {
+                builder.HasKey(x => x.Id);
+                builder.HasOne(x => x.Order);
+                builder.HasOne(x => x.Product);
+            });
+
+            modelBuilder.Entity<Order>(builder =>
+            {
+                builder.HasKey(x => x.Id);
+                builder.HasOne(x => x.CustomerOrderGroup);
+                builder.HasMany(x => x.Items);
+                builder.HasMany(x => x.TaxRules);
+            });
+            modelBuilder.Entity<Product>(builder =>
+            {
+                builder.HasKey(x => x.Id);
+            });
+            modelBuilder.Entity<TaxRule>(builder =>
+            {
+                builder.HasKey(x => x.Id);
+                builder.HasOne(x => x.TaxConfig);
+            });
+            modelBuilder.Entity<TaxConfig>(builder =>
+            {
+                builder.HasKey(x => x.Id);
+                builder.HasMany(x => x.TaxRules);
+                builder.Property(x => x.CountryCode)
+                    .HasConversion(x => x.AsString(), x => new CountryCode(x));
+            });
         }
         
         public async Task DeleteAsync(object entity)

@@ -28,7 +28,7 @@ namespace LegacyFighter.Dietary
                 .AddScoped<ITaxConfigRepository, TaxConfigRepository>()
                 .AddScoped<ITaxRuleRepository, TaxRuleRepository>()
                 .AddDbContext<DietaryDbContext>(x => x.UseInMemoryDatabase("dietary"))
-                .AddControllers();
+                .AddControllers().AddControllersAsServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DietaryDbContext dbContext)

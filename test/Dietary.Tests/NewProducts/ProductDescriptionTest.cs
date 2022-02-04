@@ -18,7 +18,7 @@ namespace LegacyFighter.Dietary.Tests.NewProducts
         public void canChangeCharInDescription()
         {
             //given
-            OldProductDescription oldProduct = ProductWithDesc("short", "long");
+            var oldProduct = ProductWithDesc("short", "long");
 
             //when
             oldProduct.ReplaceCharFromDesc('s', 'z');

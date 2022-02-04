@@ -61,7 +61,6 @@ namespace LegacyFighter.Dietary.Models
 
     public class CountryCode : IEquatable<CountryCode>
     {
-        public long Id { get; private set; } = 1; // ORM key ignore
         private readonly string _code;
 
         private CountryCode()

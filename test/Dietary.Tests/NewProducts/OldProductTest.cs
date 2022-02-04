@@ -16,7 +16,7 @@ namespace LegacyFighter.Dietary.Tests.NewProducts
         public void canIncrementCounterIfPriceIsPositive()
         {
             //given
-            OldProduct p = ProductWithPriceAndCounter(10, 10);
+            var p = ProductWithPriceAndCounter(10, 10);
 
             //when
             p.IncrementCounter();
@@ -29,7 +29,7 @@ namespace LegacyFighter.Dietary.Tests.NewProducts
         public void cannotIncrementCounterIfPriceIsNotPositive()
         {
             //given
-            OldProduct p = ProductWithPriceAndCounter(0, 10);
+            var p = ProductWithPriceAndCounter(0, 10);
 
             //expect
             Assert.Throws<InvalidOperationException>(() => p.IncrementCounter());
@@ -39,7 +39,7 @@ namespace LegacyFighter.Dietary.Tests.NewProducts
         public void canDecrementCounterIfPriceIsPositive()
         {
             //given
-            OldProduct p = ProductWithPriceAndCounter(10, 10);
+            var p = ProductWithPriceAndCounter(10, 10);
         
             //when
             p.DecrementCounter();
@@ -52,7 +52,7 @@ namespace LegacyFighter.Dietary.Tests.NewProducts
         public void cannotDecrementCounterIfPriceIsNotPositive()
         {
             //given
-            OldProduct p = ProductWithPriceAndCounter(0, 0);
+            var p = ProductWithPriceAndCounter(0, 0);
         
             //expect
             Assert.Throws<InvalidOperationException>(() => p.DecrementCounter());
@@ -62,7 +62,7 @@ namespace LegacyFighter.Dietary.Tests.NewProducts
         public void canChangePriceIfCounterIsPositive()
         {
             //given
-            OldProduct p = ProductWithPriceAndCounter(0, 10);
+            var p = ProductWithPriceAndCounter(0, 10);
         
             //when
             p.ChangePriceTo(10);
@@ -75,7 +75,7 @@ namespace LegacyFighter.Dietary.Tests.NewProducts
         public void cannotChangePriceIfCounterIsNotPositive()
         {
             //given
-            OldProduct p = ProductWithPriceAndCounter(0, 0);
+            var p = ProductWithPriceAndCounter(0, 0);
         
             //when
             p.ChangePriceTo(10);

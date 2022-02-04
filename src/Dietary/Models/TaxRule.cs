@@ -1,7 +1,8 @@
 ﻿using System;
+
 namespace LegacyFighter.Dietary.Models
 {
-    public class TaxRule
+    public class TaxRule : IEquatable<TaxRule>
     {
         public long Id { get; set; }
         public string TaxCode { get; set; }
@@ -13,7 +14,7 @@ namespace LegacyFighter.Dietary.Models
         public int BSquareFactor { get; set; }
         public int CSquareFactor { get; set; }
         public long TaxConfigId { get; set; }
-        public TaxConfig TaxConfig { get;set; }
+        public TaxConfig TaxConfig { get; set; }
 
         public static TaxRule LinearRule(int a, int b, string taxCode)
         {
@@ -32,7 +33,7 @@ namespace LegacyFighter.Dietary.Models
 
             return taxRule;
         }
-        
+
         public static TaxRule SquareRule(int a, int b, int c, string taxCode)
         {
             if (a == 0)
@@ -51,99 +52,129 @@ namespace LegacyFighter.Dietary.Models
 
             return taxRule;
         }
-    }
-    
-        public class TaxRuleBuilder
+
+        public bool Equals(TaxRule other)
         {
-            private string _taxCode;
-            private bool _isLinear;
-            private int _aFactor;
-            private int _bFactor;
-            private bool _isSquare;
-            private int _aSquareFactor;
-            private int _bSquareFactor;
-            private int _cSquareFactor;
-            private TaxConfig _taxConfig;
-
-            private TaxRuleBuilder()
-            {
-            }
-
-            public static TaxRuleBuilder ATaxRule()
-            {
-                return new TaxRuleBuilder();
-            }
-
-            public TaxRuleBuilder WithTaxCode(string taxCode)
-            {
-                _taxCode = taxCode;
-                return this;
-            }
-
-            public TaxRuleBuilder WithIsLinear(bool isLinear)
-            {
-                _isLinear = isLinear;
-                return this;
-            }
-
-            public TaxRuleBuilder WithAFactor(int aFactor)
-            {
-                _aFactor = aFactor;
-                return this;
-            }
-
-            public TaxRuleBuilder WithBFactor(int bFactor)
-            {
-                _bFactor = bFactor;
-                return this;
-            }
-
-            public TaxRuleBuilder WithIsSquare(bool isSquare)
-            {
-                _isSquare = isSquare;
-                return this;
-            }
-
-            public TaxRuleBuilder WithASquareFactor(int aSquareFactor)
-            {
-                _aSquareFactor = aSquareFactor;
-                return this;
-            }
-
-            public TaxRuleBuilder WithBSquareFactor(int bSquareFactor)
-            {
-                _bSquareFactor = bSquareFactor;
-                return this;
-            }
-
-            public TaxRuleBuilder WithCSquareFactor(int cSuqreFactor)
-            {
-                _cSquareFactor = cSuqreFactor;
-                return this;
-            }
-
-            public TaxRuleBuilder WithTaxConfig(TaxConfig taxConfig)
-            {
-                _taxConfig = taxConfig;
-                return this;
-            }
-
-            public TaxRule Build()
-            {
-                var taxRule = new TaxRule
-                {
-                    TaxCode = _taxCode,
-                    IsSquare = _isSquare,
-                    IsLinear = _isLinear,
-                    ASquareFactor = _aSquareFactor,
-                    TaxConfig = _taxConfig,
-                    AFactor = _aFactor,
-                    BFactor = _bFactor,
-                    BSquareFactor = _bSquareFactor,
-                    CSquareFactor = _cSquareFactor,
-                };
-
-                return taxRule;
-            }
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return TaxCode == other.TaxCode;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((TaxRule)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (TaxCode != null ? TaxCode.GetHashCode() : 0);
+        }
+
+        public static bool operator ==(TaxRule left, TaxRule right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(TaxRule left, TaxRule right)
+        {
+            return !Equals(left, right);
+        }
+    }
+
+    public class TaxRuleBuilder
+    {
+        private string _taxCode;
+        private bool _isLinear;
+        private int _aFactor;
+        private int _bFactor;
+        private bool _isSquare;
+        private int _aSquareFactor;
+        private int _bSquareFactor;
+        private int _cSquareFactor;
+        private TaxConfig _taxConfig;
+
+        private TaxRuleBuilder()
+        {
+        }
+
+        public static TaxRuleBuilder ATaxRule()
+        {
+            return new TaxRuleBuilder();
+        }
+
+        public TaxRuleBuilder WithTaxCode(string taxCode)
+        {
+            _taxCode = taxCode;
+            return this;
+        }
+
+        public TaxRuleBuilder WithIsLinear(bool isLinear)
+        {
+            _isLinear = isLinear;
+            return this;
+        }
+
+        public TaxRuleBuilder WithAFactor(int aFactor)
+        {
+            _aFactor = aFactor;
+            return this;
+        }
+
+        public TaxRuleBuilder WithBFactor(int bFactor)
+        {
+            _bFactor = bFactor;
+            return this;
+        }
+
+        public TaxRuleBuilder WithIsSquare(bool isSquare)
+        {
+            _isSquare = isSquare;
+            return this;
+        }
+
+        public TaxRuleBuilder WithASquareFactor(int aSquareFactor)
+        {
+            _aSquareFactor = aSquareFactor;
+            return this;
+        }
+
+        public TaxRuleBuilder WithBSquareFactor(int bSquareFactor)
+        {
+            _bSquareFactor = bSquareFactor;
+            return this;
+        }
+
+        public TaxRuleBuilder WithCSquareFactor(int cSuqreFactor)
+        {
+            _cSquareFactor = cSuqreFactor;
+            return this;
+        }
+
+        public TaxRuleBuilder WithTaxConfig(TaxConfig taxConfig)
+        {
+            _taxConfig = taxConfig;
+            return this;
+        }
+
+        public TaxRule Build()
+        {
+            var taxRule = new TaxRule
+            {
+                TaxCode = _taxCode,
+                IsSquare = _isSquare,
+                IsLinear = _isLinear,
+                ASquareFactor = _aSquareFactor,
+                TaxConfig = _taxConfig,
+                AFactor = _aFactor,
+                BFactor = _bFactor,
+                BSquareFactor = _bSquareFactor,
+                CSquareFactor = _cSquareFactor,
+            };
+
+            return taxRule;
+        }
+    }
 }
